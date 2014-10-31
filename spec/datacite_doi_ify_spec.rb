@@ -40,4 +40,11 @@ describe DataciteDoiIfy do
     end
   end
 
+  describe 'activate a DOI' do
+    context 'after a DOI being inactivated'
+      it 'post new metadata for a given DOI' do
+        pending
+      end
+  end
+
 end
