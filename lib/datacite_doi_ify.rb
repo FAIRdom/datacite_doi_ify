@@ -1,5 +1,2 @@
 require "datacite_doi_ify/version"
-
-module DataciteDoiIfy
-  # Your code goes here...
-end
+require "datacite_doi_ify/datacite"
