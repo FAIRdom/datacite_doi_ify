@@ -5,7 +5,7 @@ require "datacite_doi_ify/version"
 Gem::Specification.new do |s|
   s.name        = "datacite_doi_ify"
   s.version     = DataciteDoiIfy::VERSION
-  s.authors     = ["quyen"]
+  s.authors     = ["quyen nguyen"]
   s.email       = ["thucquyendn@gmail.com"]
   s.homepage    = ""
   s.summary     = %q{TODO: Write a gem summary}
