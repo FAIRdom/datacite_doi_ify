@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://test:test@test.datacite.org/mds/doi
+    uri: https://test:test@mds.datacite.org/doi
     body:
       encoding: UTF-8
       string: |-
