@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["quyen nguyen"]
   s.email       = ["thucquyendn@gmail.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = "A ruby gem to working with datacite doi restful web service"
+  s.description = "Mint DOI and resolve DOI using Datacite restful web service"
 
   s.rubyforge_project = "datacite_doi_ify"
 
