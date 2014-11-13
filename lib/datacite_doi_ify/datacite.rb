@@ -3,8 +3,9 @@ require 'rest-client'
 class Datacite
   ENDPOINT = 'https://mds.datacite.org'
 
-  def initialize(user_name, password)
-    @endpoint = RestClient::Resource.new(ENDPOINT, user_name, password)
+  def initialize(user_name, password, endpoint=nil)
+    endpoint ||= ENDPOINT
+    @endpoint = RestClient::Resource.new(endpoint, user_name, password)
   end
 
   def resolve doi
