@@ -1,5 +1,6 @@
 *.gem
 .bundle
 .idea/
+coverage/
 Gemfile.lock
 pkg/*
