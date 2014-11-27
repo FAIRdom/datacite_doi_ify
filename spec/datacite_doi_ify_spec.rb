@@ -27,7 +27,7 @@ describe DataciteDoiIfy do
   describe 'mint a DOI' do
     context 'DOI does not exist' do
       it 'mints a new DOI', :vcr => {:cassette_name => "mint_a_DOI/mints_a_new_DOI"} do
-        metadata = open('my_test.xml').read
+        metadata = open_test_metadata('my_test.xml')
         expect(endpoint.upload_metadata(metadata)).to eq('OK (10.5072/my_test)')
         expect(endpoint.mint(doi, url)).to eq('OK')
         expect(endpoint.resolve(doi)).to eq(url)
@@ -43,7 +43,7 @@ describe DataciteDoiIfy do
     context 'DOI exists' do
       it 'updates the URL if different', :vcr => {:cassette_name => "mint_a_DOI/updates_the_URL_if_different"} do
         #use test_doi.xml so that it does not update the url of my_test.xml
-        metadata = open('test_doi.xml').read
+        metadata = open_test_metadata('test_doi.xml')
         doi = '10.5072/test_doi'
         expect(endpoint.upload_metadata(metadata)).to eq('OK (10.5072/test_doi)')
         expect(endpoint.mint(doi, url)).to eq('OK')
@@ -58,7 +58,7 @@ describe DataciteDoiIfy do
 
   describe 'retrieve metadata' do
     it 'returns metadata associated with a given DOI', :vcr => {:cassette_name => "retrieve_metadata/returns_metadata_associated_with_a_given_DOI"} do
-      metadata = open('my_test.xml').read
+      metadata = open_test_metadata('my_test.xml')
       expect(endpoint.metadata(doi)).to eq(metadata)
     end
 
@@ -70,13 +70,13 @@ describe DataciteDoiIfy do
 
   describe 'upload metadata' do
     it 'creates new version of metadata', :vcr => {:cassette_name => "upload_metadata/creates_new_version_of_metadata"} do
-      metadata = open('my_test.xml').read
+      metadata = open_test_metadata('my_test.xml')
       expect(endpoint.upload_metadata(metadata)).to eq('OK (10.5072/my_test)')
     end
 
     it 'returns 400 for an invalid xml', :vcr => {:cassette_name => "upload_metadata/returns_400_for_an_invalid_xml"} do
       # metadata without a DOI => Bad request
-      metadata = open('invalid_doi.xml').read
+      metadata = open_test_metadata('invalid_doi.xml')
       expect(endpoint.upload_metadata(metadata)).to eq('400')
     end
   end
@@ -89,6 +89,11 @@ describe DataciteDoiIfy do
     context 'after a DOI being inactivated' do
       it 'post new metadata for a given DOI'
     end
+  end
+
+  def open_test_metadata filename
+    file = File.join "spec/","/metadata_files/", filename
+    open(file).read
   end
 
   #TODO: Media API
