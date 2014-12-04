@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = DataciteDoiIfy::VERSION
   s.authors     = ["quyen nguyen"]
   s.email       = ["thucquyendn@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "https://seek.sysmo-db.org/people/372"
   s.summary     = "A ruby gem for working with the DataCite doi restful web service"
   s.description = "Mint a DOI and resolve a DOI using the Datacite restful web service"
 
@@ -22,14 +22,14 @@ Gem::Specification.new do |s|
   # s.add_development_dependency "rspec"
   s.add_runtime_dependency "rest-client", "~> 1.7"
   
-  s.add_development_dependency "rspec"
-  s.add_development_dependency "rspec-nc"
-  s.add_development_dependency "guard"
-  s.add_development_dependency "guard-rspec"
-  s.add_development_dependency "pry"
-  s.add_development_dependency "pry-remote"
-  s.add_development_dependency "pry-nav"
-  s.add_development_dependency "coveralls"
-  s.add_development_dependency "webmock"
-  s.add_development_dependency "vcr"
+  s.add_development_dependency "rspec", "~> 3.1"
+  s.add_development_dependency "rspec-nc", "~> 0.2"
+  s.add_development_dependency "guard", "~> 2.8"
+  s.add_development_dependency "guard-rspec", "~> 4.3"
+  s.add_development_dependency "pry", "~> 0.10"
+  s.add_development_dependency "pry-remote", "~> 0.1"
+  s.add_development_dependency "pry-nav", "~> 0.2"
+  s.add_development_dependency "coveralls", "~> 0.7"
+  s.add_development_dependency "webmock", "~> 1.20"
+  s.add_development_dependency "vcr", "~> 2.9"
 end
