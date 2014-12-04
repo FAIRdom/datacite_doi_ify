@@ -12,8 +12,7 @@ class Datacite
     begin
       response = @endpoint["doi/#{doi}"].get
     rescue Exception => e
-      #error code
-      e.message[0..2]
+      e.message
     end
   end
 
@@ -21,8 +20,7 @@ class Datacite
     begin
       response = @endpoint['doi'].post "doi=#{doi}\nurl=#{url}", content_type: "text/plain;charset=UTF-8"
     rescue Exception => e
-      #error code
-      e.message[0..2]
+      e.message
     end
   end
 
@@ -30,8 +28,7 @@ class Datacite
     begin
       response = @endpoint['metadata'].post(metadata,content_type: 'application/xml;charset=UTF-8')
     rescue Exception => e
-      #error code
-      e.message[0..2]
+      e.message
     end
   end
 
@@ -39,8 +36,7 @@ class Datacite
     begin
       response = @endpoint["metadata/#{doi}"].get
     rescue Exception => e
-      #error code
-      e.message[0..2]
+      e.message
     end
   end
 end

@@ -15,12 +15,12 @@ describe DataciteDoiIfy do
       invalid_user = 'invalid'
       invalid_password = 'invalid'
       endpoint = Datacite.new(invalid_user, invalid_password)
-      expect(endpoint.resolve(doi)).to eq('401')
+      expect(endpoint.resolve(doi)[0..2]).to eq('401')
     end
 
     it 'returns a 404 for not-found DOI', :vcr => {:cassette_name => "resolve_a_DOI/returns_a_404_for_not-found_DOI"} do
       doi = 'non-existing'
-      expect(endpoint.resolve(doi)).to eq('404')
+      expect(endpoint.resolve(doi)[0..2]).to eq('404')
     end
   end
 
@@ -36,7 +36,7 @@ describe DataciteDoiIfy do
       it 'returns 412 if metadata has not been uploaded', :vcr => {:cassette_name => "mint_a_DOI/returns_412_if_metadata_has_not_been_uploaded"} do
         new_doi = "10.5072/new_doi"
         #412 Precondition failed
-        expect(endpoint.mint(new_doi, url)).to eq('412')
+        expect(endpoint.mint(new_doi, url)[0..2]).to eq('412')
       end
     end
 
@@ -64,7 +64,7 @@ describe DataciteDoiIfy do
 
     it 'returns 404 for not found DOI', :vcr => {:cassette_name => "retrieve_metadata/returns_404_for_not_found_DOI"} do
       doi = 'non-existing'
-      expect(endpoint.metadata(doi)).to eq('404')
+      expect(endpoint.metadata(doi)[0..2]).to eq('404')
     end
   end
 
@@ -77,7 +77,7 @@ describe DataciteDoiIfy do
     it 'returns 400 for an invalid xml', :vcr => {:cassette_name => "upload_metadata/returns_400_for_an_invalid_xml"} do
       # metadata without a DOI => Bad request
       metadata = open_test_metadata('invalid_doi.xml')
-      expect(endpoint.upload_metadata(metadata)).to eq('400')
+      expect(endpoint.upload_metadata(metadata)[0..2]).to eq('400')
     end
   end
 
