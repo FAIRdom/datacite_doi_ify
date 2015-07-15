@@ -14,6 +14,6 @@ VCR.configure do |c|
   c.configure_rspec_metadata!
 end
 
-RSpec.configure do |c|
+RSpec.configure do
 
 end

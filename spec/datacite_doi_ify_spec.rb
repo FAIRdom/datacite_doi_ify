@@ -91,6 +91,8 @@ describe DataciteDoiIfy do
     end
   end
 
+  private
+
   def open_test_metadata filename
     file = File.join "spec/","/metadata_files/", filename
     open(file).read
