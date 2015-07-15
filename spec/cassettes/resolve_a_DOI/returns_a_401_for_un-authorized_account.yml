@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://invalid:invalid@mds.datacite.org/doi/10.5072/MY_TEST
+    uri: https://invalid:invalid@test.datacite.org/mds/doi/10.5072/MY_TEST
     body:
       encoding: US-ASCII
       string: ''
@@ -25,7 +25,7 @@ http_interactions:
       Expires:
       - Thu, 01 Jan 1970 00:00:00 UTC
       Www-Authenticate:
-      - Basic realm="mds.datacite.org"
+      - Basic realm="test.datacite.org/mds"
       Content-Length:
       - '15'
       Content-Type:

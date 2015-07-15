@@ -2,6 +2,7 @@ require 'rest-client'
 
 class Datacite
   ENDPOINT = 'https://mds.datacite.org'
+  TEST_ENDPOINT = 'https://test.datacite.org/mds'
 
   def initialize(user_name, password, endpoint=nil)
     endpoint ||= ENDPOINT
@@ -9,34 +10,18 @@ class Datacite
   end
 
   def resolve doi
-    begin
-      response = @endpoint["doi/#{doi}"].get
-    rescue Exception => e
-      e.message
-    end
+    @endpoint["doi/#{doi}"].get
   end
 
   def mint doi, url
-    begin
-      response = @endpoint['doi'].post "doi=#{doi}\nurl=#{url}", content_type: "text/plain;charset=UTF-8"
-    rescue Exception => e
-      e.message
-    end
+    @endpoint['doi'].post("doi=#{doi}\nurl=#{url}", content_type: 'text/plain;charset=UTF-8')
   end
 
   def upload_metadata metadata
-    begin
-      response = @endpoint['metadata'].post(metadata,content_type: 'application/xml;charset=UTF-8')
-    rescue Exception => e
-      e.message
-    end
+    @endpoint['metadata'].post(metadata, content_type: 'application/xml;charset=UTF-8')
   end
 
   def metadata doi
-    begin
-      response = @endpoint["metadata/#{doi}"].get
-    rescue Exception => e
-      e.message
-    end
+    @endpoint["metadata/#{doi}"].get
   end
 end

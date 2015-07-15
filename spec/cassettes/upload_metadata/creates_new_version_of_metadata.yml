@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://test:test@mds.datacite.org/metadata
+    uri: https://test:test@test.datacite.org/mds/metadata
     body:
       encoding: UTF-8
       string: |
@@ -58,7 +58,7 @@ http_interactions:
       - no-cache
       - no-store
       Location:
-      - https://mds.datacite.org/metadata/10.5072/my_test
+      - https://test.datacite.org/mds/metadata/10.5072/my_test
       Content-Type:
       - application/xml;charset=UTF-8
       Content-Length:

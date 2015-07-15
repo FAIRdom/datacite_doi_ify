@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe DataciteDoiIfy do
 
-  let(:endpoint)    { Datacite.new('test', 'test') }
+  let(:endpoint)    { Datacite.new('test', 'test', Datacite::TEST_ENDPOINT) }
   let(:doi)    { '10.5072/MY_TEST' }
   let(:url)    { 'https://seek.sysmo-db.org' }
 
@@ -14,13 +14,13 @@ describe DataciteDoiIfy do
     it 'returns a 401 for un-authorized account', :vcr => {:cassette_name => "resolve_a_DOI/returns_a_401_for_un-authorized_account"} do
       invalid_user = 'invalid'
       invalid_password = 'invalid'
-      endpoint = Datacite.new(invalid_user, invalid_password)
-      expect(endpoint.resolve(doi)[0..2]).to eq('401')
+      endpoint = Datacite.new(invalid_user, invalid_password, Datacite::TEST_ENDPOINT)
+      expect { endpoint.resolve(doi) }.to raise_error(RestClient::Unauthorized)
     end
 
     it 'returns a 404 for not-found DOI', :vcr => {:cassette_name => "resolve_a_DOI/returns_a_404_for_not-found_DOI"} do
       doi = 'non-existing'
-      expect(endpoint.resolve(doi)[0..2]).to eq('404')
+      expect { endpoint.resolve(doi) }.to raise_error(RestClient::ResourceNotFound)
     end
   end
 
@@ -36,7 +36,7 @@ describe DataciteDoiIfy do
       it 'returns 412 if metadata has not been uploaded', :vcr => {:cassette_name => "mint_a_DOI/returns_412_if_metadata_has_not_been_uploaded"} do
         new_doi = "10.5072/new_doi"
         #412 Precondition failed
-        expect(endpoint.mint(new_doi, url)[0..2]).to eq('412')
+        expect { endpoint.mint(new_doi, url) }.to raise_error(RestClient::PreconditionFailed)
       end
     end
 
@@ -64,7 +64,7 @@ describe DataciteDoiIfy do
 
     it 'returns 404 for not found DOI', :vcr => {:cassette_name => "retrieve_metadata/returns_404_for_not_found_DOI"} do
       doi = 'non-existing'
-      expect(endpoint.metadata(doi)[0..2]).to eq('404')
+      expect { endpoint.metadata(doi) }.to raise_error(RestClient::ResourceNotFound)
     end
   end
 
@@ -77,7 +77,7 @@ describe DataciteDoiIfy do
     it 'returns 400 for an invalid xml', :vcr => {:cassette_name => "upload_metadata/returns_400_for_an_invalid_xml"} do
       # metadata without a DOI => Bad request
       metadata = open_test_metadata('invalid_doi.xml')
-      expect(endpoint.upload_metadata(metadata)[0..2]).to eq('400')
+      expect { endpoint.upload_metadata(metadata) }.to raise_error(RestClient::BadRequest)
     end
   end
 
