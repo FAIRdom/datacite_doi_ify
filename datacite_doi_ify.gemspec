@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
                   'web service'
   s.description = 'Mint a DOI and resolve a DOI using the Datacite restful ' \
                   'web service'
-  spec.license  = 'BSD'
+  s.license     = 'BSD'
 
   s.rubyforge_project = 'datacite_doi_ify'
 
